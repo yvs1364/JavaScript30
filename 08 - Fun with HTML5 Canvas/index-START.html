@@ -1,19 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>HTML5 Canvas</title>
-</head>
-<body>
-<canvas id="draw" width="800" height="800"></canvas>
-<script>
-</script>
 
-<style>
-  html, body {
-    margin: 0;
-  }
-</style>
+  <head>
+    <meta charset="UTF-8">
+    <title>HTML5 Canvas</title>
+  </head>
 
-</body>
+  <body>
+    <div class="container">
+      <canvas id="draw" width="800" height="800"></canvas>
+      <button type="btn" onclick="resetDraw(ctx, canvas);"> Reset </button>
+    </div>
+  <script>
+    const canvas = document.querySelector("#draw");
+    const ctx = canvas.getContext("2d");
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+    let isDrawing = false;
+    let x = 0;
+    let y = 0;
+    const rect = canvas.getBoundingClientRect();
+
+    canvas.addEventListener('mousedown', e => {
+      x = e.clientX - rect.left;
+      y = e.clientY - rect.top;
+      isDrawing = true;
+    });
+    canvas.addEventListener('mousemove', e => {
+      if (isDrawing === true) {
+        drawLine(ctx, x, y, e.clientX - rect.left, e.clientY - rect.top);
+        x = e.clientX - rect.left;
+        y = e.clientY - rect.top;
+      }
+    });
+    window.addEventListener('mouseup', e => {
+      if (isDrawing === true) {
+        drawLine(ctx, x, y, e.clientX - rect.left, e.clientY - rect.top);
+        x = 0;
+        y = 0;
+        isDrawing = false;
+      }
+    });
+    function drawLine(ctx, x1, y1, x2, y2) {
+      ctx.beginPath();
+      ctx.strokeStyle = "blueviolet";
+      ctx.lineJoin = "round";
+      ctx.lineCap = "round";
+      ctx.lineWidth = 50;
+      ctx.moveTo(x1, y1);
+      ctx.lineTo(x2, y2);
+      ctx.stroke();
+      ctx.closePath();
+    }
+    function resetDraw(ctx, canvas) {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      }
+  </script>
+
+  <style>
+    html,
+    body {
+      margin: 10px;
+    }
+    canvas {
+      border: 1px solid black;
+      border-radius: 12px;
+    }
+    button {
+      background-color: #008CBA;
+      border-radius: 12px;
+      color: white;
+      padding: 15px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+    }
+  </style>
+
+  </body>
+
 </html>

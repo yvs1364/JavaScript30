@@ -1,46 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Console Tricks!</title>
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8">
+    <title>Console Tricks!</title>
+  </head>
+  <body>
+    <p onClick="makeGreen()">×BREAK×DOWN×</p>
+    <script>
+      const dogs = [{ name: 'Snickers', age: 2 }, { name: 'hugo', age: 8 }];
 
-  <p onClick="makeGreen()">×BREAK×DOWN×</p>
+      function makeGreen() {
+        const p = document.querySelector('p');
+        p.style.color = '#BADA55';
+        p.style.fontSize = '50px';
+      }
 
-  <script>
-    const dogs = [{ name: 'Snickers', age: 2 }, { name: 'hugo', age: 8 }];
-
-    function makeGreen() {
+      // Regular
+      console.log("Bonjour !");
+      // Interpolated
+      console.log("List of dogs %o", dogs);
+      // Styled
+      console.log("%c STYLED ! ", "background: mediumseagreen; color: palevioletred ");
+      // warning!
+      console.warn("WARNING");
+      // Error :|
+      console.error("Erf another one...");
+      // Info
+      console.info("Info");
+      // Testing
+      console.assert(document.querySelector('test'), "You have no element with ID 'test'");
+      // clearing
+      console.clear();
+      // Viewing DOM Elements
       const p = document.querySelector('p');
-      p.style.color = '#BADA55';
-      p.style.fontSize = '50px';
-    }
+      console.dir(p);
 
-    // Regular
-
-    // Interpolated
-
-    // Styled
-
-    // warning!
-
-    // Error :|
-
-    // Info
-
-    // Testing
-
-    // clearing
-
-    // Viewing DOM Elements
-
-    // Grouping together
-
-    // counting
-
-    // timing
-
-  </script>
-</body>
+      // Grouping together
+      dogs.forEach(dog => {
+        console.group(`${dog.name}`);
+        console.log(`This is ${dog.name}`);
+        console.log(`${dog.name} add ${dog.age} years old`);
+        console.log(`${dog.name} add ${dog.age * 7} dog years old`);
+        console.groupEnd(`${dog.name}`);
+      });
+      // counting
+      console.count("fifteen");
+      console.count("Jean Eude");
+      console.count("fifteen");
+      console.count("Jean Eude");
+      console.count("fifteen");
+      console.count("fifteen");
+      // timing
+      i = 0;
+      console.time("While loop !");
+      while (i < 10000000) {
+        i++
+      }
+      console.timeEnd("While loop !");
+    </script>
+  </body>
 </html>
