@@ -17,9 +17,9 @@
   html {
     box-sizing: border-box;
   }
-  
-  *, *:before, *:after { 
-    box-sizing: inherit; 
+
+  *, *:before, *:after {
+    box-sizing: inherit;
   }
 
   div {
@@ -42,6 +42,23 @@
 
 <button></button>
 <script>
+  const all = document.querySelectorAll("div");
+  console.log(all);
+  const btn = document.querySelector("button");
+  console.log(btn);
+
+  function show() {
+    console.log(this.classList.value);
+  }
+
+  btn.addEventListener("click", () => {
+    console.log("Clicked !");
+  },{once: true});
+
+  all.forEach(div => div.addEventListener("click", show, {
+    capture: false,
+    once: true
+  }));
 
 </script>
 </body>

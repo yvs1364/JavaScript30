@@ -54,7 +54,21 @@
   </div>
 
 <script>
+// Get the navbar
+const navbar = document.getElementById("main");
+console.log(navbar);
 
+// Get the offset position of the navbar
+let sticky = navbar.offsetTop;
+
+function position() {
+  if (window.pageYOffset >= sticky) {
+    navbar.classList.add("sticky")
+  } else {
+    navbar.classList.remove("sticky");
+  }
+}
+window.addEventListener('scroll', position);
 </script>
 
 </body>

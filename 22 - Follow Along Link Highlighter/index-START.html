@@ -26,8 +26,28 @@
     </div>
 
   <script>
-    // 👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀
+  const getA = document.querySelectorAll("a");
+  const span = document.createElement("span");
+  span.classList.add("highlight");
+  document.body.appendChild(span);
+
+  function highlight() {
+    const link = this.getBoundingClientRect();
+    console.log(link);
+    const coord = {
+      width: link.width,
+      height: link.height,
+      top: link.top + window.scrollY,
+      left: link.left + window.scrollX
+    }
+    console.log(coord)
+    span.style.width = `${coord.width}px`
+    span.style.height = `${coord.height}px`
+    span.style.transform = `translate(${coord.left}px, ${coord.top}px)`
+  }
+getA.forEach(a => a.addEventListener("mousemove", highlight));
+
+
   </script>
 </body>
 </html>
-
