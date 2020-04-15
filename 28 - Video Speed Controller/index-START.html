@@ -1,20 +1,44 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Video Speed Scrubber</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
+  <html lang="en">
 
-  <div class="wrapper">
-    <video class="flex" width="765" height="430" src="http://clips.vorwaerts-gmbh.de/VfE_html5.mp4" loop controls></video>
-    <div class="speed">
-      <div class="speed-bar">1×</div>
+  <head>
+    <meta charset="UTF-8">
+    <title>Video Speed Scrubber</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+
+  <body>
+
+    <div class="wrapper">
+      <video class="flex" width="765" height="430" src="http://clips.vorwaerts-gmbh.de/VfE_html5.mp4" loop controls></video>
+      <div class="speed">
+        <div class="speed-bar">1×</div>
+      </div>
     </div>
-  </div>
 
-<script>
-</script>
-</body>
-</html>
+    <script>
+    const speed = document.querySelector(".speed");
+      console.log(speed);
+    const speedBar = speed.querySelector(".speed-bar");
+      console.log(speedBar);
+    const video = document.querySelector(".flex");
+      console.log(video);
+
+    function move(e){
+      console.log("move")
+      const y = e.pageY - this.offsetTop;
+      const percent = y / this.offsetHeight;
+      const min = 0.4;
+      const top = 10;
+      const playing = percent * (top - min) + min;
+
+      speedBar.style.height = (y + 0.4) + "px"
+      speedBar.textContent = playing.toFixed(1) + "×";
+      video.playbackRate = playing;
+    }
+
+    speed.addEventListener("mousemove", move)
+    </script>
+  </body>
+
+  </html>
